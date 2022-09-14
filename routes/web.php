@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\YoutubeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,9 @@ Route::middleware(['auth','user-role:admin'])->group(function(){
 
 Route::middleware(['auth','user-role:student'])->group(function(){
     Route::get('/student/home',[StudentController::class,'index'])->name('home.student');
+    Route::get('/student/videos',[YoutubeController::class,'index'])->name('index');
+    Route::get('/student/watch{id}',[YoutubeController::class,'watch'])->name('watch');
+    Route::get('/student/result',[YoutubeController::class,'result'])->name('result');
 });
 
 Route::middleware(['auth','user-role:teacher'])->group(function(){
