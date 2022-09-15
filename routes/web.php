@@ -29,6 +29,10 @@ Route::middleware(['auth','user-role:admin'])->group(function(){
     Route::get('/addteacher',[AdminController::class,'addTeacher'])->name('teacher');
     Route::post('/create',[AdminController::class,'create'])->name('createstudent');
     Route::post('/createt',[AdminController::class,'createTeacher'])->name('createteacher');
+    Route::get('/showsemester',[AdminController::class,'viewSemesters'])->name('semesterview');
+    Route::post('/semester',[AdminController::class,'createSemester'])->name('createsemester');
+    Route::get('/courses',[AdminController::class,'viewCourses'])->name('courses');
+    Route::post('/addcourses',[AdminController::class,'createCourses'])->name('createcourses');
 });
 
 Route::middleware(['auth','user-role:student'])->group(function(){

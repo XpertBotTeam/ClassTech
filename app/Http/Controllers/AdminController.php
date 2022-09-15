@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Semester;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -36,6 +38,38 @@ class AdminController extends Controller
         return view('admin.addteacher');
     }
 
+    public function viewSemesters(){
+        return view('admin.addSemester');
+    }
+
+    public function viewCourses(){
+        $semester = Semester::all();
+        return view('admin.addCourses',compact('semester'));
+    }
+
+    public function createCourses(Request $request){
+        $request->validate([
+            'coursename'=>'required',
+            'coursecode'=>'required',
+            'semester_id'=>'required',]);
+            $courses = Course::create([
+                'coursename'=>$request['coursename'],
+                'coursecode'=>$request['coursecode'],
+                'semester_id'=>$request['semester_id'],
+            ]);
+
+            return view('admin.dashboard');
+    }
+    public function createSemester(Request $request){
+        $request->validate([
+            'name'=>'required'
+        ]);
+        $semester = Semester::create([
+            'name' => $request['name']
+        ]);
+
+        return view('admin.dashboard');
+    }
     public function create(Request $request){
         $request->validate([
             'name'=>'required',
