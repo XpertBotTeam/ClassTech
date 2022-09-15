@@ -50,7 +50,16 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
+                                @if($errors->has('g-recaptcha-response'))
+                                    <span class="invalid-feedback" style="display: block">
+                                        <strong>{{$erros->first('g-recaptcha-response')}}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

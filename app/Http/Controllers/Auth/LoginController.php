@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-
+use App\Rules\Captcha;
 class LoginController extends Controller
 {
     /*
@@ -44,7 +44,8 @@ class LoginController extends Controller
         $input = $request->all();
         $this->validate($request,[
             'email'=>'required|email',
-            'password'=>'required'
+            'password'=>'required',
+            'g-recaptcha-response'=>new Captcha(),
         ]);
 
         if(auth()->attempt(['email'=>$input["email"],'password'=>$input['password']]))
